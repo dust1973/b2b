@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding="ISO-8859-1"?>
+<jtlshop3plugin>
+<Name>JTL OCI Driver</Name>
+<Description>JTL-Shop Driver für OCI-Schnittstelle</Description>
+<Author>Alexander Fuchs</Author>
+<URL>http://</URL>
+<XMLVersion>102</XMLVersion>
+<Shop4Version>400</Shop4Version>
+<PluginID>jtl_oci_driver</PluginID>
+<Install>
+	<Version nr="100">
+		<CreateDate>2017-10-19</CreateDate>
+	</Version>
+	<Hooks>
+		<Hook id="52">52_warenkorb.php</Hook>
+		<Hook id="132">132_postget.php</Hook>
+	</Hooks>
+	<Locales>
+		<Variable>
+			<Name>oci_checkoutOpenCI</Name>
+			<Description>Last Step Button</Description>
+			<VariableLocalized iso="GER">Warenkorb ins SAP übertragen</VariableLocalized>
+			<VariableLocalized iso="ENG">Warenkorb ins SAP übertragen</VariableLocalized>
+		</Variable>
+	</Locales>
+	<FrontendLink>
+		<Link>
+			<Filename>oci_bestellvorgang.php</Filename>
+			<Name>oci</Name>
+			<Template>oci.tpl</Template>
+			<VisibleAfterLogin>Y</VisibleAfterLogin>
+			<PrintButton>N</PrintButton>
+			<SSL>2</SSL>
+			<LinkLanguage iso="GER">
+				<Seo>OCIBestellvorgang</Seo>
+				<Name>OCIBestellvorgang</Name>
+				<Title>OCIBestellvorgang</Title>
+				<MetaTitle>OCIBestellvorgang</MetaTitle>
+				<MetaKeywords>OCIBestellvorgang</MetaKeywords>
+				<MetaDescription>OCIBestellvorgang</MetaDescription>
+			</LinkLanguage>
+		</Link>
+	</FrontendLink>
+</Install>
+</jtlshop3plugin>
