@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Template isFullResponsive="true">
+    <Name>Datev-Shop-Template</Name>
+    <Author>Alexander Fuchs</Author>
+    <URL>https://www.b2b.woehrl.de</URL>
+    <Version>1.00</Version>
+    <ShopVersion>405</ShopVersion>
+    <Parent>Evo</Parent>
+    <Preview>preview.png</Preview>
+    <Description>Das ist ein Datev Shop Template!</Description>
+</Template>
