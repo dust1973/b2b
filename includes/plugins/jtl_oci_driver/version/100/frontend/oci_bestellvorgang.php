@@ -32,7 +32,7 @@ require_once PFAD_ROOT . PFAD_INCLUDES . 'warenkorb_inc.php';
 require_once $oPlugin->cFrontendPfad . '../classes/OpenCatalogInterface.php';
 global $bestellung, $Einstellungen, $smarty, $cart;
 //print '<pre>';
-//var_dump($cart);
+//var_dump($_POST);
 //print '<pre>';
 
 /*Warenkorb Object
@@ -2584,7 +2584,7 @@ if ( count( $cart->PositionenArr ) > 0 ) {
 		$request .='<tr><td>NEW_ITEM-CUST_FIELD1[%d]</td><td></td>';
 		$request .='<tr><td>NEW_ITEM-CUST_FIELD2[%d]</td><td>6968000</td>';
 		$request .='<tr><td>NEW_ITEM-CUST_FIELD3[%d]</td><td></td>';
-		$request .='<tr><td>NEW_ITEM-CUST_FIELD4[%d]</td><td></td>';
+		$request .='<tr><td>NEW_ITEM-CUST_FIELD4[%d]</td><td>'.$_POST['NEW_ITEM-CUST_FIELD4'][1].'</td>';
 		$request .='<tr><td>NEW_ITEM-CUST_FIELD5[%d]</td><td></td>';
 		$request .='<tr><td>NEW_ITEM-EXT_PRODUCT_ID[%d]</td><td></td>';
 //		$request .=  sprintf( '<input type="hidden" name="NEW_ITEM-DESCRIPTION[%d]" value="%s" />'."\r\n", $i, $positionArr->cName['ger'] );

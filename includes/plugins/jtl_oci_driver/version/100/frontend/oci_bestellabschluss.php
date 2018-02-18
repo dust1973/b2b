@@ -1,6 +1,8 @@
 <?php
-Shop::Smarty()->assign( 'oci', false );
-$html = null;
+
+
+/** @global JTLSmarty $smarty */
+
 if ( isset($_SESSION['OCI']) ) {
 	require_once PFAD_ROOT . PFAD_INCLUDES . 'bestellvorgang_inc.php';
 	require_once PFAD_ROOT . PFAD_INCLUDES . 'warenkorb_inc.php';
@@ -9,11 +11,23 @@ if ( isset($_SESSION['OCI']) ) {
 	Shop::Smarty()->assign( 'oci', true );
 	Shop::Smarty()->assign( 'oci_checkoutOpenCI', $oPlugin->oPluginSprachvariableAssoc_arr["oci_checkoutOpenCI"] );
 
-	$html = '<form id="buy_form" method="post" action="ocibestellabschluss" >';
+	$hookUrl = '';
+	if ( isset( $_SESSION['HOOK_URL'] ) ) {
+		$OCIAction = $_SESSION['HOOK_URL'];
+	} else {
+		$OCIAction = 'OCIBestellvorgang';
+	}
 
-	/*if ( count( $cart->PositionenArr ) > 0 ) {
+//var_dump($cart);
+//print '<pre>';
+//var_dump($_SESSION);
+//print '</pre>';
+	if ( count( $cart->PositionenArr ) > 0 ) {
 		$i = 0;
 		foreach ( $cart->PositionenArr as $positionArr ) {
+		//print '<pre>';
+		//var_dump($positionArr->Artikel->cArtNr);
+		//print '</pre>';
 			$i ++;
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-DESCRIPTION[%d]" value="%s" />', $i, $positionArr->cName['ger'] );
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-MATNR[%d]" value="" />', $i );
@@ -29,24 +43,28 @@ if ( isset($_SESSION['OCI']) ) {
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-MANUFACTCODE[%d]" value="" />', $i );
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-MANUFACTMAT[%d]" value="" />', $i );
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-MATGROUP[%d]" value="%d" />', $i, 40010101);
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-SERVICE[%d]" value="" />', $i );
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CONTRACT[%d]" value="" />', $i );
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-SERVICE[%d]" value="" />', $i );	
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CONTRACT[%d]" value="" />', $i );	
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CONTRACT_ITEM[%d]" value="" />', $i );
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD1[%d]" value="" />', $i );
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD2[%d]" value="%d" />', $i, 6968000);
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD3[%d]" value="" />', $i );
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD4[%d]" value="" />', $i );
-			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD5[%d]" value="" />', $i );
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD1[%d]" value="" />', $i );	
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD2[%d]" value="%d" />', $i, 6968000);	
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD3[%d]" value="" />', $i );	
+			//$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD4[%d]" value="" />', $i );	
+			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-CUST_FIELD5[%d]" value="" />', $i );	
 			$html .= sprintf( '<input type="hidden" name="NEW_ITEM-EXT_PRODUCT_ID[%d]" value="" />', $i );
+			//if (isset( $_SESSION['HOOK_URL'] ) ) {
+				//loescheWarenkorbPosition( $i );
+			//}
 		}
-	}*/
+	}
 
-	//if ( isset( $_SESSION['HOOK_URL'] ) ) {
-	//	$html .= '<input type="submit" name="absenden" class="submit btn btn-primary btn-lg pull-right" value="' . $oPlugin->oPluginSprachvariableAssoc_arr['oci_checkoutOpenCI'] . '" /></form>';
-	//} else {
-	$html .= '<input type="submit" name="absenden" class="submit btn btn-primary btn-lg pull-right" value="Weiter zur Bestellung" /></form>';
-	//}
+	if ( isset( $_SESSION['HOOK_URL'] ) ) {
+		$html .= '<input type="submit" name="absenden" class="submit btn btn-primary btn-lg pull-right" value="' . $oPlugin->oPluginSprachvariableAssoc_arr['oci_checkoutOpenCI'] . '" /></form>';
+	} else {
+		$html .= '<input type="submit" name="absenden" class="submit btn btn-primary btn-lg pull-right" value="' . $oPlugin->oPluginSprachvariableAssoc_arr['oci_checkoutOpenCI'] . '" /></form>';
+	}
 	Shop::Smarty()->assign( 'html', $html );
+	Shop::Smarty()->assign( 'OCIAction', $OCIAction );
+
 
 }
-

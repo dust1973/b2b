@@ -2,6 +2,19 @@
 In Datei D:\xampp\htdocs\shop\templates\Evo\basket\index.tpl
     Zeile 79: s=75 //FrontendLink OCI-Bestellvorgang ID
 
-<div class="proceed col-xs-12{if $showCoupon} col-sm-6 col-lg-8{/if}">
-     <a href="navi.php?s=75&lang=eng" class="submit btn btn-primary btn-lg pull-right">{$oci_checkoutOpenCI}</a>
-</div>
+                        {if $oci}
+                            <div class="proceed col-xs-12{if $showCoupon} col-sm-6 col-lg-8{/if}">
+                                {$html}
+                            </div>
+                        {else}
+                            <div class="proceed col-xs-12{if $showCoupon} col-sm-6 col-lg-8{/if}">
+                                <a href="{get_static_route id='bestellvorgang.php'}?wk=1&test" class="submit btn btn-primary btn-lg pull-right">{lang key='nextStepCheckout' section='checkout'}</a>
+                            </div>
+                        {/if}
+						
+						
+						dev.b2b.woehrl.de/datev-shop4.05/?PASSWORD=testoci&USERNAME=datev&HOOK_URL=http://sinnleffers.de
+						
+						
+						
+						
